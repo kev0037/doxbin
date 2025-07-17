@@ -32,38 +32,35 @@ def refreshLoosers():
 
 def refreshAdminPosts():
     global admin_posts_list
+    admin_posts_list = []  # Clear list on each refresh
+
     admin_posts_file_list = os.listdir(ADMIN_PASTES)
-    if not(len(admin_posts_list) == len(admin_posts_file_list)):
-        for admin_post_file_name in admin_posts_file_list:
-            admin_post_file_name_path = os.path.join(
-                ADMIN_PASTES, admin_post_file_name)
-            admin_post_file_name_stats = os.stat(admin_post_file_name_path)
-            admin_posts_list.append(
-                {
-                    "name": admin_post_file_name,
-                    "size": bytes2KB(admin_post_file_name_stats.st_size),
-                    "creation_date": datetime.utcfromtimestamp(int(admin_post_file_name_stats.st_mtime)).strftime('%d-%m-%Y'),
-                    "creation_time": datetime.utcfromtimestamp(int(admin_post_file_name_stats.st_mtime)).strftime('%H:%M:%S')
-                }
-            )
+    for admin_post_file_name in admin_posts_file_list:
+        admin_post_file_name_path = os.path.join(ADMIN_PASTES, admin_post_file_name)
+        admin_post_file_name_stats = os.stat(admin_post_file_name_path)
+        admin_posts_list.append({
+            "name": admin_post_file_name,
+            "size": bytes2KB(admin_post_file_name_stats.st_size),
+            "creation_date": datetime.utcfromtimestamp(int(admin_post_file_name_stats.st_mtime)).strftime('%d-%m-%Y'),
+            "creation_time": datetime.utcfromtimestamp(int(admin_post_file_name_stats.st_mtime)).strftime('%H:%M:%S')
+        })
+
 
 
 def refreshAnonPosts():
     global anon_posts_list
+    anon_posts_list = []  # Clear list on each refresh
+
     anon_posts_file_list = os.listdir(ANON_PASTES)
-    if not(len(anon_posts_list) == len(anon_posts_file_list)):
-        for anon_post_file_name in anon_posts_file_list:
-            anon_post_file_name_path = os.path.join(
-                ANON_PASTES, anon_post_file_name)
-            anon_post_file_name_stats = os.stat(anon_post_file_name_path)
-            anon_posts_list.append(
-                {
-                    "name": anon_post_file_name,
-                    "size": bytes2KB(anon_post_file_name_stats.st_size),
-                    "creation_date": datetime.utcfromtimestamp(int(anon_post_file_name_stats.st_mtime)).strftime('%d-%m-%Y'),
-                    "creation_time": datetime.utcfromtimestamp(int(anon_post_file_name_stats.st_mtime)).strftime('%H:%M:%S')
-                }
-            )
+    for anon_post_file_name in anon_posts_file_list:
+        anon_post_file_name_path = os.path.join(ANON_PASTES, anon_post_file_name)
+        anon_post_file_name_stats = os.stat(anon_post_file_name_path)
+        anon_posts_list.append({
+            "name": anon_post_file_name,
+            "size": bytes2KB(anon_post_file_name_stats.st_size),
+            "creation_date": datetime.utcfromtimestamp(int(anon_post_file_name_stats.st_mtime)).strftime('%d-%m-%Y'),
+            "creation_time": datetime.utcfromtimestamp(int(anon_post_file_name_stats.st_mtime)).strftime('%H:%M:%S')
+        })
 
 
 def bytes2KB(value):
